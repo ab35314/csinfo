@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>資訊組研習與數位學習入口網</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        accent: {
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+        .card-hover {
+            transition: all 0.25s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.12);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+
+    <!-- 頂部導覽列 Header -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="p-2 bg-blue-600 text-white rounded-xl shadow-md flex items-center justify-center">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-lg sm:text-xl text-slate-900 leading-tight">資訊組數位研習專區</h1>
+                        <p class="text-xs text-slate-500">教師與同仁線上研習快捷入口</p>
+                    </div>
+                </div>
+                <nav class="flex space-x-1 sm:space-x-3 text-sm font-medium">
+                    <a href="#security" class="px-3 py-2 text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors flex items-center gap-1.5">
+                        <i data-lucide="lock" class="w-4 h-4"></i>
+                        <span class="hidden sm:inline">資訊安全研習</span>
+                        <span class="sm:hidden">資安</span>
+                    </a>
+                    <a href="#digital-learning" class="px-3 py-2 text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors flex items-center gap-1.5">
+                        <i data-lucide="book-open" class="w-4 h-4"></i>
+                        <span class="hidden sm:inline">數位學習專區</span>
+                        <span class="sm:hidden">數位學習</span>
+                    </a>
+                    <a href="#upload" class="px-3 py-2 text-slate-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-colors flex items-center gap-1.5">
+                        <i data-lucide="upload-cloud" class="w-4 h-4"></i>
+                        <span class="hidden sm:inline">成果上傳</span>
+                        <span class="sm:hidden">上傳</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主頁 Hero 區塊 -->
+    <section class="bg-gradient-to-b from-blue-50 to-slate-50 py-10 sm:py-14 border-b border-slate-200/60">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 mb-4">
+                <i data-lucide="info" class="w-3.5 h-3.5"></i> 年度研習專案
+            </span>
+            <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                資訊安全與數位教學增能研習
+            </h2>
+            <p class="mt-3 text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
+                請各位教職員同仁依規定期限至相應平臺完成線上課程，點選下方課程卡片即可直接開啟研習頁面。
+            </p>
+        </div>
+    </section>
+
+    <!-- 主要內容區 -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-14">
+
+        <!-- 第一專區：資訊安全三小時 -->
+        <section id="security" class="scroll-mt-20">
+            <div class="flex items-center justify-between mb-6 pb-2 border-b border-slate-200">
+                <div class="flex items-center space-x-3">
+                    <div class="p-2 bg-emerald-500 text-white rounded-lg shadow-sm">
+                        <i data-lucide="shield-alert" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">第一專區：資訊安全三小時</h3>
+                        <p class="text-xs sm:text-sm text-slate-500">依資通安全法規定，全體教職員每年須完成至少 3 小時以上資安通識課程</p>
+                    </div>
+                </div>
+                <span class="hidden sm:inline-flex items-center px-2.5 py-1 rounded text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    法定必修 3 小時
+                </span>
+            </div>
+
+            <!-- 資安課程卡片 -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm card-hover relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 opacity-5 pointer-events-none">
+                    <i data-lucide="shield" class="w-64 h-64 text-emerald-900"></i>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+                    <div class="space-y-3 max-w-2xl">
+                        <div class="flex flex-wrap gap-2 items-center">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+                                e等公務園+學習平臺
+                            </span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700">
+                                課程代碼：10046809
+                            </span>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-900">
+                            資訊安全線上研習課程（3小時）
+                        </h4>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            提供資通安全基礎認知、勒索軟體防護、個人資料保護法規及社交工程演練相關知識。完成學習並通過測驗後，時數將自動匯入公務人員或教師研習紀錄系統。
+                        </p>
+                        <div class="flex items-center text-xs text-slate-500 gap-4 pt-1">
+                            <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 時數認證：3 小時</span>
+                            <span class="flex items-center gap-1"><i data-lucide="globe" class="w-3.5 h-3.5"></i> 線上自主研習</span>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <a href="https://elearn.hrd.gov.tw/info/10046809" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-medium rounded-xl shadow-md hover:shadow-lg transition-all text-sm w-full md:w-auto">
+                            <span>前往研習課程</span>
+                            <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第二專區：數位學習專區 -->
+        <section id="digital-learning" class="scroll-mt-20">
+            <div class="flex items-center justify-between mb-6 pb-2 border-b border-slate-200">
+                <div class="flex items-center space-x-3">
+                    <div class="p-2 bg-blue-600 text-white rounded-lg shadow-sm">
+                        <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">第二專區：數位學習專區</h3>
+                        <p class="text-xs sm:text-sm text-slate-500">教育部推動中小學數位學習精進方案相關研習課程（A1、A2、A3、B5-1）</p>
+                    </div>
+                </div>
+                <span class="hidden sm:inline-flex items-center px-2.5 py-1 rounded text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+                    教育部磨課師平臺
+                </span>
+            </div>
+
+            <!-- 4 個連結的 Grid 卡片排列 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- A1 卡片 -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm card-hover flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-bold rounded-lg tracking-wide uppercase">
+                                    A1 課程
+                                </span>
+                                <span class="px-2.5 py-1 bg-rose-100 text-rose-700 text-xs font-bold rounded-lg tracking-wide">
+                                    新進教師
+                                </span>
+                            </div>
+                            <span class="text-xs text-slate-400">ID: 10003230</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+                            數位學習工作坊（一）：基礎研習 A1
+                        </h4>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                            認識數位學習精進方案目標、科技輔助自主學習概念、教學軟體與數位平臺基礎操作指引。
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs text-slate-500 flex items-center gap-1">
+                            <i data-lucide="laptop" class="w-3.5 h-3.5"></i> 教育部磨課師
+                        </span>
+                        <a href="https://moocs.moe.edu.tw/moocs/#/course/detail/10003230" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
+                            開啟課程 <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- A2 卡片 -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm card-hover flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-bold rounded-lg tracking-wide uppercase">
+                                    A2 課程
+                                </span>
+                                <span class="px-2.5 py-1 bg-rose-100 text-rose-700 text-xs font-bold rounded-lg tracking-wide">
+                                    新進教師
+                                </span>
+                            </div>
+                            <span class="text-xs text-slate-400">ID: 10003231</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900 mb-2">
+                            數位學習工作坊（二）：平臺應用 A2
+                        </h4>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                            深入教學平臺實際操作與課程設計，掌握課堂數位教學工具、學生自主學習與互動工具實務應用。
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs text-slate-500 flex items-center gap-1">
+                            <i data-lucide="laptop" class="w-3.5 h-3.5"></i> 教育部磨課師
+                        </span>
+                        <a href="https://moocs.moe.edu.tw/moocs/#/course/detail/10003231" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition-colors">
+                            開啟課程 <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- A3 卡片 -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm card-hover flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="px-3 py-1 bg-violet-100 text-violet-800 text-xs font-bold rounded-lg tracking-wide uppercase">
+                                    A3 課程
+                                </span>
+                                <span class="px-2.5 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-lg tracking-wide">
+                                    所有教師
+                                </span>
+                            </div>
+                            <span class="text-xs text-slate-400">ID: 10002252</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900 mb-2">
+                            數位素養與數位倫理研習 A3
+                        </h4>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                            涵蓋網路倫理、版權法令、數位足跡與防範網路沉迷等核心素養，提升教師數位教學法治概念。
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs text-slate-500 flex items-center gap-1">
+                            <i data-lucide="laptop" class="w-3.5 h-3.5"></i> 教育部磨課師
+                        </span>
+                        <a href="https://moocs.moe.edu.tw/moocs/#/course/detail/10002252" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="inline-flex items-center gap-1.5 text-sm font-semibold text-violet-600 hover:text-violet-800 transition-colors">
+                            開啟課程 <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- B5-1 卡片 -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm card-hover flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded-lg tracking-wide uppercase">
+                                    B5-1 課程
+                                </span>
+                                <span class="px-2.5 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-lg tracking-wide">
+                                    所有教師
+                                </span>
+                            </div>
+                            <span class="text-xs text-slate-400">關鍵字搜尋：B5</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900 mb-2">
+                            進階科技輔助自主學習研習 B5-1
+                        </h4>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                            搜尋並瀏覽所有 B5 系列進階課程模組，提供領域專長深化教學與科技輔助學習教案實務。
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs text-slate-500 flex items-center gap-1">
+                            <i data-lucide="search" class="w-3.5 h-3.5"></i> 教育部磨課師 (搜尋)
+                        </span>
+                        <a href="https://moocs.moe.edu.tw/moocs/#/course/search?keyword=B5" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-600 hover:text-amber-800 transition-colors">
+                            前往搜尋結果 <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 第三專區：成果上傳專區 -->
+        <section id="upload" class="scroll-mt-20">
+            <div class="flex items-center justify-between mb-6 pb-2 border-b border-slate-200">
+                <div class="flex items-center space-x-3">
+                    <div class="p-2 bg-purple-600 text-white rounded-lg shadow-sm">
+                        <i data-lucide="upload-cloud" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">第三專區：研習成果繳交與上傳專區</h3>
+                        <p class="text-xs sm:text-sm text-slate-500">完成研習後，請將研習證明或成果檔提報至資訊組備查</p>
+                    </div>
+                </div>
+                <span class="hidden sm:inline-flex items-center px-2.5 py-1 rounded text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-200">
+                    Google 表單繳交
+                </span>
+            </div>
+
+            <!-- 上傳表單卡片 -->
+            <div class="bg-gradient-to-r from-purple-900 to-indigo-900 rounded-2xl p-6 sm:p-8 text-white shadow-md relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none">
+                    <i data-lucide="file-check-2" class="w-64 h-64 text-white"></i>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+                    <div class="space-y-3 max-w-2xl">
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-500/30 text-purple-200 border border-purple-400/30">
+                            研習成果線上回報
+                        </span>
+                        <h4 class="text-xl font-bold text-white">
+                            研習證明與成果填報表單
+                        </h4>
+                        <p class="text-sm text-purple-100 leading-relaxed">
+                            請點選右側按鈕開啟「研習成果繳交表單」，填寫教職員基本資料並上傳研習時數證明或完成截圖檔。
+                        </p>
+                        <div class="flex items-center text-xs text-purple-200 gap-4 pt-1">
+                            <span class="flex items-center gap-1"><i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> 請確認檔案清晰無誤</span>
+                            <span class="flex items-center gap-1"><i data-lucide="user-check" class="w-3.5 h-3.5"></i> 資訊組彙整備查</span>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <a href="https://forms.gle/js7FJhNM3zxtQ2X59" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white hover:bg-purple-50 text-purple-900 font-bold rounded-xl shadow-lg hover:shadow-xl transition-all text-sm w-full md:w-auto">
+                            <i data-lucide="file-up" class="w-4 h-4 text-purple-700"></i>
+                            <span>前往成果上傳表單</span>
+                            <i data-lucide="external-link" class="w-4 h-4 text-purple-500"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 研習注意事項與 FAQ 提示區 -->
+        <section class="bg-blue-50/60 rounded-2xl p-6 border border-blue-100">
+            <div class="flex items-start space-x-3">
+                <i data-lucide="help-circle" class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"></i>
+                <div class="text-sm text-slate-700 space-y-1">
+                    <h5 class="font-bold text-slate-900">研習溫馨小叮嚀</h5>
+                    <ul class="list-disc list-inside text-xs sm:text-sm text-slate-600 space-y-1">
+                        <li>研習完成後，平臺時數通常於次週自動同步至全國教師在職進修網或公務人員人事資訊系統。</li>
+                        <li>登入「磨課師」或「e等公務園」請優先使用教育雲端帳號（OpenID）以利時數自動對接。</li>
+                        <li>若有任何帳號登入或研習時數認證問題，請隨時洽詢學校資訊組。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto px-4">
+            <p>© 資訊組 研習管理系統 | 建議使用 Chrome / Edge 最新版本以獲最佳瀏覽體驗</p>
+        </div>
+    </footer>
+
+    <!-- 初始化 Lucide 圖示 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
