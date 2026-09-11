@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>全國教師在職進修網｜歷年研習紀錄下載與數位學習代碼檢索指南</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef6ff',
+              100: '#d9ebff',
+              500: '#2563eb',
+              600: '#1d4ed8',
+              700: '#1e40af',
+              800: '#1e3a8a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+    .kbd-key {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2rem;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #1f2937;
+      background-color: #f3f4f6;
+      border: 1px solid #d1d5db;
+      border-bottom-width: 3px;
+      border-radius: 0.375rem;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- Toast 通知提示 -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl space-x-3">
+    <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+    <span id="toast-msg" class="text-sm font-medium">已複製到剪貼簿！</span>
+  </div>
+
+  <!-- 頂部導覽列 -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+          <i class="fa-solid fa-graduation-cap text-lg"></i>
+        </div>
+        <div>
+          <span class="font-bold text-slate-900 text-base sm:text-lg block leading-tight">教師研習紀錄快速檢索指南</span>
+          <span class="text-xs text-slate-500 hidden sm:block">全國在職進修網 ‧ 數位學習指標代碼 A1~B5 查詢教學</span>
+        </div>
+      </div>
+      <nav class="flex items-center space-x-2 sm:space-x-4">
+        <a href="#steps" class="px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition">下載步驟</a>
+        <a href="#shortcuts" class="px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition">搜尋技巧</a>
+        <a href="#code-list" class="px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition">代碼清單</a>
+        <a href="#tracker" class="px-3 py-1.5 text-xs sm:text-sm font-medium bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-lg transition">自我檢核</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero 橫幅 -->
+  <section class="bg-gradient-to-b from-blue-50 via-white to-slate-50 pt-10 pb-12 border-b border-slate-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 mb-4">
+        <i class="fa-solid fa-sparkles mr-1.5 text-blue-600"></i> 生生用平板／數位學習精進方案必備
+      </span>
+      <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+        如何從「全教網」下載歷年研習紀錄<br class="hidden sm:inline"/>並快速搜尋 <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">A1 ~ B5</span> 研習時數？
+      </h1>
+      <p class="max-w-2xl mx-auto text-sm sm:text-base text-slate-600 mb-8 leading-relaxed">
+        教師在進行考績、進修積分採計或數位精進方案檢核時，常需確認自身已完成哪些研習。本教學提供完整的履歷下載步驟，並搭配一鍵複製快速查詢功能！
+      </p>
+      
+      <!-- 快速入口與快捷小工具 -->
+      <div class="inline-flex flex-wrap items-center justify-center gap-3">
+        <a href="https://inservice.edu.tw/" target="_blank" rel="noopener noreferrer" 
+           class="inline-flex items-center px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm shadow-lg shadow-blue-600/25 transition">
+          <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i> 前往「全國教師在職進修網」
+        </a>
+        <a href="#code-list" class="inline-flex items-center px-5 py-2.5 rounded-xl bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-medium text-sm shadow-sm transition">
+          <i class="fa-solid fa-magnifying-glass mr-2 text-blue-600"></i> 查看 A1~B5 代碼表
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-10 space-y-16 flex-grow">
+
+    <!-- 區塊一：3 步驟匯出歷年研習履歷 -->
+    <section id="steps" class="scroll-mt-20">
+      <div class="text-center mb-10">
+        <h2 class="text-2xl font-bold text-slate-900 flex items-center justify-center gap-2">
+          <span class="w-8 h-8 rounded-lg bg-blue-600 text-white text-sm inline-flex items-center justify-center font-bold">1</span>
+          三步驟：從全教網匯出歷年研習紀錄
+        </h2>
+        <p class="text-slate-500 text-sm mt-1">請依照以下流程登入並匯出完整個人履歷表</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Step 1 Card -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl font-bold mb-4">
+              <i class="fa-solid fa-right-to-bracket"></i>
+            </div>
+            <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Step 01</span>
+            <h3 class="text-lg font-bold text-slate-900 mt-1 mb-2">登入與進入專區</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              進入 <a href="https://inservice.edu.tw" target="_blank" class="text-blue-600 underline">全國教師在職進修網</a>，使用「帳號密碼」或「縣市 OpenID」登入後，點擊上方選單的<strong class="text-slate-800">「個人管理專區」</strong>。
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-500">
+            <i class="fa-regular fa-lightbulb text-amber-500 mr-1"></i> 可使用教育雲端帳號單一簽入。
+          </div>
+        </div>
+
+        <!-- Step 2 Card -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl font-bold mb-4">
+              <i class="fa-solid fa-calendar-days"></i>
+            </div>
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Step 02</span>
+            <h3 class="text-lg font-bold text-slate-900 mt-1 mb-2">設定查詢條件</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              在左側選單點擊<strong class="text-slate-800">「研習紀錄」</strong>。在「起訖日期」處：
+            </p>
+            <ul class="text-xs text-slate-600 mt-2 space-y-1.5 list-disc list-inside bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+              <li><strong>開始日期：</strong>往前調整至剛任教年份（例如：民國 100 年）。</li>
+              <li><strong>結束日期：</strong>保持為當天。</li>
+              <li><strong>核發狀態：</strong>勾選「全部」或「已核發」。</li>
+            </ul>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-500">
+            <i class="fa-regular fa-clock text-blue-500 mr-1"></i> 將起日留空或拉遠才能列出歷年全部時數。
+          </div>
+        </div>
+
+        <!-- Step 3 Card -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl font-bold mb-4">
+              <i class="fa-solid fa-file-pdf"></i>
+            </div>
+            <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Step 03</span>
+            <h3 class="text-lg font-bold text-slate-900 mt-1 mb-2">下載另存 PDF 檔案</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              點擊<strong class="text-slate-800">「查詢」</strong>產生列表後，點選頁面右上方的<strong class="text-emerald-700">「列印研習履歷」</strong>，在彈出的列印視窗中，目標印表機選擇<strong class="text-slate-800">「另存為 PDF」</strong>即可將歷年紀錄下載存檔。
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-500">
+            <i class="fa-solid fa-check text-emerald-500 mr-1"></i> PDF 帶有教育部防偽浮水印與條碼，開檔後即可搜尋與截圖！
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 區塊二：Ctrl + F 搜尋與畫面截圖教學 -->
+    <section id="shortcuts" class="scroll-mt-20">
+      <div class="bg-gradient-to-br from-slate-900 to-indigo-950 text-white rounded-3xl p-6 sm:p-10 shadow-xl overflow-hidden relative">
+        <!-- 裝飾背景 -->
+        <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-3xl">
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-indigo-800/80 text-indigo-200 mb-4">
+            <i class="fa-solid fa-bolt mr-1.5 text-amber-400"></i> 秒查與截圖密技
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-4">
+            開啟 PDF 履歷：<span class="text-amber-300">Ctrl + F</span> 快速搜尋 & 畫面截圖教學
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+            開啟下載好的 PDF 檔案或網頁後，請先使用「搜尋快捷鍵」找到指標代碼（如 A1、B1），再使用「截圖快捷鍵」將證明畫面擷取留存：
+          </p>
+
+          <!-- 搜尋與截圖快捷鍵對照 -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <!-- Windows -->
+            <div class="bg-white/10 border border-white/15 rounded-2xl p-4 space-y-3">
+              <div class="flex items-center space-x-2 text-sky-400 font-bold border-b border-white/10 pb-2">
+                <i class="fa-brands fa-windows text-xl"></i>
+                <span>Windows 系統快捷鍵</span>
+              </div>
+              <div class="space-y-2 text-xs">
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-300">1. 快速搜尋：</span>
+                  <div class="flex items-center space-x-1">
+                    <span class="kbd-key">Ctrl</span><span class="text-slate-400">+</span><span class="kbd-key">F</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-300">2. 範圍截圖：</span>
+                  <div class="flex items-center space-x-1">
+                    <span class="kbd-key">Win</span><span class="text-slate-400">+</span><span class="kbd-key">Shift</span><span class="text-slate-400">+</span><span class="kbd-key">S</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mac -->
+            <div class="bg-white/10 border border-white/15 rounded-2xl p-4 space-y-3">
+              <div class="flex items-center space-x-2 text-slate-200 font-bold border-b border-white/10 pb-2">
+                <i class="fa-brands fa-apple text-xl"></i>
+                <span>Mac 蘋果系統快捷鍵</span>
+              </div>
+              <div class="space-y-2 text-xs">
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-300">1. 快速搜尋：</span>
+                  <div class="flex items-center space-x-1">
+                    <span class="kbd-key">⌘ Cmd</span><span class="text-slate-400">+</span><span class="kbd-key">F</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-300">2. 範圍截圖：</span>
+                  <div class="flex items-center space-x-1">
+                    <span class="kbd-key">⌘ Cmd</span><span class="text-slate-400">+</span><span class="kbd-key">Shift</span><span class="text-slate-400">+</span><span class="kbd-key">4</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 截圖範例說明卡片 -->
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-3">
+            <div class="font-bold text-amber-300 flex items-center gap-2 text-sm sm:text-base">
+              <i class="fa-solid fa-camera"></i> 完美研習截圖必備的 3 個要素（審核不退件）：
+            </div>
+            <ul class="text-xs sm:text-sm text-slate-200 space-y-2 list-disc list-inside leading-relaxed">
+              <li><strong class="text-amber-200">包含個人姓名與身分資訊：</strong> 截圖頂部或頁首請務必包含您的姓名，證明為本人紀錄。</li>
+              <li><strong class="text-amber-200">保留搜尋高亮標記：</strong> 使用 <code class="bg-black/30 px-1.5 py-0.5 rounded text-amber-300">Ctrl + F</code> 搜尋代碼（如 A1）後，系統會將關鍵字標上黃底顯眼顏色，請將該行文字完整圈選截圖。</li>
+              <li><strong class="text-amber-200">清楚顯示研習名稱與核發時數：</strong> 確定畫面涵蓋「研習名稱」、「辦理日期」以及「核發時數（如 3 小時）」。</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 區塊二：Ctrl + F 搜尋技巧指南 -->
+    <section id="shortcuts" class="scroll-mt-20">
+      <div class="bg-gradient-to-br from-slate-900 to-indigo-950 text-white rounded-3xl p-6 sm:p-10 shadow-xl overflow-hidden relative">
+        <!-- 裝飾背景 -->
+        <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-3xl">
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-indigo-800/80 text-indigo-200 mb-4">
+            <i class="fa-solid fa-bolt mr-1.5 text-amber-400"></i> 秒查密技
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-4">
+            打開檔案後，善用 <span class="text-amber-300">Ctrl + F</span> 快速查找目標代碼
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+            無論是在 <strong>瀏覽器網頁</strong>、<strong>Excel 試算表</strong> 或是 <strong>PDF 履歷</strong> 中，都可以直接呼叫「快速搜尋列」：
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+            <div class="bg-white/10 border border-white/15 rounded-2xl p-4 flex items-center space-x-4">
+              <i class="fa-brands fa-windows text-3xl text-sky-400"></i>
+              <div>
+                <div class="text-xs text-slate-300 font-medium">Windows 系統</div>
+                <div class="mt-1 flex items-center space-x-1.5">
+                  <span class="kbd-key">Ctrl</span>
+                  <span class="text-slate-400 text-xs">+</span>
+                  <span class="kbd-key">F</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white/10 border border-white/15 rounded-2xl p-4 flex items-center space-x-4">
+              <i class="fa-brands fa-apple text-3xl text-slate-200"></i>
+              <div>
+                <div class="text-xs text-slate-300 font-medium">Mac 蘋果系統</div>
+                <div class="mt-1 flex items-center space-x-1.5">
+                  <span class="kbd-key">⌘ Command</span>
+                  <span class="text-slate-400 text-xs">+</span>
+                  <span class="kbd-key">F</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-xs sm:text-sm text-slate-300 space-y-2">
+            <div class="font-bold text-amber-300 flex items-center gap-1.5">
+              <i class="fa-solid fa-circle-exclamation"></i> 搜尋時的 3 個小撇步：
+            </div>
+            <p>1. <strong>名稱可能有括號：</strong> 研習名稱常見格式包含 <code class="bg-black/30 px-1.5 py-0.5 rounded text-amber-200">【A1】</code>、<code class="bg-black/30 px-1.5 py-0.5 rounded text-amber-200">A1-</code>、<code class="bg-black/30 px-1.5 py-0.5 rounded text-amber-200">(A1)</code> 或直接寫中文名稱，建議以<strong>純代碼（如 A1）</strong>或<strong>研習核心關鍵字（如 數位學習工作坊）</strong>分別搜尋。</p>
+            <p>2. <strong>B5-1 與 B5-2：</strong> 部分研習可能標示為 <code class="bg-black/30 px-1.5 py-0.5 rounded text-amber-200">B5</code>、<code class="bg-black/30 px-1.5 py-0.5 rounded text-amber-200">B5-1</code> 或 <code class="bg-black/30 px-1.5 py-0.5 rounded text-amber-200">B5_1</code>，若搜不到請嘗試只搜 <code class="bg-black/30 px-1.5 py-0.5 rounded text-amber-200">B5</code>。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 區塊三：A1~B5 研習代碼清單與一鍵複製 -->
+    <section id="code-list" class="scroll-mt-20">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 pb-4 border-b border-slate-200 gap-4">
+        <div>
+          <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Quick Copy Keywords</span>
+          <h2 class="text-2xl font-bold text-slate-900 mt-1">數位學習研習代碼對照表</h2>
+          <p class="text-slate-500 text-sm mt-1">點擊「複製」按鈕，立即將代碼複製到剪貼簿供 <kbd class="kbd-key text-[10px]">Ctrl+F</kbd> 使用</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-slate-500 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">
+            共 <strong class="text-blue-600 font-bold">8</strong> 個重點指標
+          </span>
+        </div>
+      </div>
+
+      <!-- 代碼卡片 Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        <!-- A1 -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:border-blue-300 hover:shadow-md transition group">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center space-x-3">
+              <span class="w-12 h-12 rounded-xl bg-blue-50 text-blue-700 font-black text-lg flex items-center justify-center border border-blue-100">
+                A1
+              </span>
+              <div>
+                <h3 class="font-bold text-slate-900 group-hover:text-blue-600 transition">數位學習工作坊（一）</h3>
+                <span class="text-xs text-slate-500">基礎通識 / 科技輔助教學理念與介紹</span>
+              </div>
+            </div>
+            <button onclick="copyCode('A1', 'A1 數位學習工作坊(一)')" class="px-3 py-1.5 bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-700 text-xs font-medium rounded-lg transition flex items-center space-x-1">
+              <i class="fa-regular fa-copy"></i>
+              <span>複製 A1</span>
+            </button>
+          </div>
+          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>常見時數：3 小時</span>
+            <span class="text-slate-400">備用關鍵字：工作坊(一)</span>
+          </div>
+        </div>
+
+        <!-- A2 -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:border-blue-300 hover:shadow-md transition group">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center space-x-3">
+              <span class="w-12 h-12 rounded-xl bg-blue-50 text-blue-700 font-black text-lg flex items-center justify-center border border-blue-100">
+                A2
+              </span>
+              <div>
+                <h3 class="font-bold text-slate-900 group-hover:text-blue-600 transition">數位學習工作坊（二）</h3>
+                <span class="text-xs text-slate-500">平臺操作與應用（如因材網、均一、PaGamO 等）</span>
+              </div>
+            </div>
+            <button onclick="copyCode('A2', 'A2 數位學習工作坊(二)')" class="px-3 py-1.5 bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-700 text-xs font-medium rounded-lg transition flex items-center space-x-1">
+              <i class="fa-regular fa-copy"></i>
+              <span>複製 A2</span>
+            </button>
+          </div>
+          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>常見時數：3 小時</span>
+            <span class="text-slate-400">備用關鍵字：工作坊(二)</span>
+          </div>
+        </div>
+
+        <!-- A3 -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:border-blue-300 hover:shadow-md transition group">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center space-x-3">
+              <span class="w-12 h-12 rounded-xl bg-blue-50 text-blue-700 font-black text-lg flex items-center justify-center border border-blue-100">
+                A3
+              </span>
+              <div>
+                <h3 class="font-bold text-slate-900 group-hover:text-blue-600 transition">數位素養議題研習</h3>
+                <span class="text-xs text-slate-500">網路素養、資訊安全、數位倫理與智慧財產權</span>
+              </div>
+            </div>
+            <button onclick="copyCode('A3', 'A3 數位素養')" class="px-3 py-1.5 bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-700 text-xs font-medium rounded-lg transition flex items-center space-x-1">
+              <i class="fa-regular fa-copy"></i>
+              <span>複製 A3</span>
+            </button>
+          </div>
+          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>常見時數：3 小時</span>
+            <span class="text-slate-400">備用關鍵字：數位素養</span>
+          </div>
+        </div>
+
+        <!-- B1 -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:border-emerald-300 hover:shadow-md transition group">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center space-x-3">
+              <span class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-700 font-black text-lg flex items-center justify-center border border-emerald-100">
+                B1
+              </span>
+              <div>
+                <h3 class="font-bold text-slate-900 group-hover:text-emerald-600 transition">科技輔助自主學習工作坊</h3>
+                <span class="text-xs text-slate-500">進階研習 / 自主學習四學策略與課堂實踐</span>
+              </div>
+            </div>
+            <button onclick="copyCode('B1', 'B1 科技輔助自主學習')" class="px-3 py-1.5 bg-slate-100 hover:bg-emerald-600 hover:text-white text-slate-700 text-xs font-medium rounded-lg transition flex items-center space-x-1">
+              <i class="fa-regular fa-copy"></i>
+              <span>複製 B1</span>
+            </button>
+          </div>
+          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>常見時數：12 小時 (2天)</span>
+            <span class="text-slate-400">備用關鍵字：自主學習</span>
+          </div>
+        </div>
+
+        <!-- B2 -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:border-emerald-300 hover:shadow-md transition group">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center space-x-3">
+              <span class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-700 font-black text-lg flex items-center justify-center border border-emerald-100">
+                B2
+              </span>
+              <div>
+                <h3 class="font-bold text-slate-900 group-hover:text-emerald-600 transition">數位科技融入教學工作坊</h3>
+                <span class="text-xs text-slate-500">學科專屬融入設計、PBL 或混成教學模式</span>
+              </div>
+            </div>
+            <button onclick="copyCode('B2', 'B2 數位科技融入教學')" class="px-3 py-1.5 bg-slate-100 hover:bg-emerald-600 hover:text-white text-slate-700 text-xs font-medium rounded-lg transition flex items-center space-x-1">
+              <i class="fa-regular fa-copy"></i>
+              <span>複製 B2</span>
+            </button>
+          </div>
+          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>常見時數：6 小時</span>
+            <span class="text-slate-400">備用關鍵字：科技融入教學</span>
+          </div>
+        </div>
+
+        <!-- B4 -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:border-emerald-300 hover:shadow-md transition group">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center space-x-3">
+              <span class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-700 font-black text-lg flex items-center justify-center border border-emerald-100">
+                B4
+              </span>
+              <div>
+                <h3 class="font-bold text-slate-900 group-hover:text-emerald-600 transition">各類教學軟體與新興科技</h3>
+                <span class="text-xs text-slate-500">VR/AR、AI 生成式工具、課堂互動載具應用</span>
+              </div>
+            </div>
+            <button onclick="copyCode('B4', 'B4 教學軟體與新興科技')" class="px-3 py-1.5 bg-slate-100 hover:bg-emerald-600 hover:text-white text-slate-700 text-xs font-medium rounded-lg transition flex items-center space-x-1">
+              <i class="fa-regular fa-copy"></i>
+              <span>複製 B4</span>
+            </button>
+          </div>
+          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>常見時數：3~6 小時</span>
+            <span class="text-slate-400">備用關鍵字：新興科技 / 軟體</span>
+          </div>
+        </div>
+
+        <!-- B5-1 -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:border-purple-300 hover:shadow-md transition group">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center space-x-3">
+              <span class="w-12 h-12 rounded-xl bg-purple-50 text-purple-700 font-black text-sm flex items-center justify-center border border-purple-100">
+                B5-1
+              </span>
+              <div>
+                <h3 class="font-bold text-slate-900 group-hover:text-purple-600 transition">學校數位學習領導與推動</h3>
+                <span class="text-xs text-slate-500">行政管理、校訂數位學習推動策略研習</span>
+              </div>
+            </div>
+            <button onclick="copyCode('B5-1', 'B5-1 學校數位學習推動')" class="px-3 py-1.5 bg-slate-100 hover:bg-purple-600 hover:text-white text-slate-700 text-xs font-medium rounded-lg transition flex items-center space-x-1">
+              <i class="fa-regular fa-copy"></i>
+              <span>複製 B5-1</span>
+            </button>
+          </div>
+          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>常見對象：校長、主任、組長及種子教師</span>
+            <span class="text-slate-400">備用：B5_1 或 領導推動</span>
+          </div>
+        </div>
+
+        <!-- B5-2 -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:border-purple-300 hover:shadow-md transition group">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center space-x-3">
+              <span class="w-12 h-12 rounded-xl bg-purple-50 text-purple-700 font-black text-sm flex items-center justify-center border border-purple-100">
+                B5-2
+              </span>
+              <div>
+                <h3 class="font-bold text-slate-900 group-hover:text-purple-600 transition">社群跨校共備與公開觀課</h3>
+                <span class="text-xs text-slate-500">數位學習社群推動、公開授課與共備工作坊</span>
+              </div>
+            </div>
+            <button onclick="copyCode('B5-2', 'B5-2 跨校共備與公開課')" class="px-3 py-1.5 bg-slate-100 hover:bg-purple-600 hover:text-white text-slate-700 text-xs font-medium rounded-lg transition flex items-center space-x-1">
+              <i class="fa-regular fa-copy"></i>
+              <span>複製 B5-2</span>
+            </button>
+          </div>
+          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>常見對象：社群召集人及骨幹教師</span>
+            <span class="text-slate-400">備用：B5_2 或 跨校社群</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 區塊四：互動式研習自我檢核表 -->
+    <section id="tracker" class="scroll-mt-20">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-lg">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+          <div>
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2">
+              <i class="fa-solid fa-list-check text-blue-600"></i> 個人研習時數自我檢核表
+            </h2>
+            <p class="text-slate-500 text-xs sm:text-sm mt-1">在您的研習紀錄中搜尋並確認後，可在此即時勾選紀錄達成進度！</p>
+          </div>
+
+          <!-- 進度顯示 -->
+          <div class="flex items-center space-x-3 bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200">
+            <div class="text-right">
+              <div class="text-xs text-slate-500 font-medium">已完成指標</div>
+              <div class="text-lg font-bold text-blue-600" id="progress-text">0 / 8 項</div>
+            </div>
+            <div class="w-12 h-12 relative flex items-center justify-center">
+              <svg class="w-12 h-12 transform -rotate-90" viewBox="0 0 36 36">
+                <path class="text-slate-200" stroke-width="3.5" stroke="currentColor" fill="none"
+                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                <path id="progress-circle" class="text-blue-600 transition-all duration-500" stroke-dasharray="0, 100" stroke-width="3.5" stroke-linecap="round" stroke="currentColor" fill="none"
+                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+              </svg>
+              <span id="progress-percent" class="absolute text-[11px] font-bold text-slate-700">0%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 勾選清單 -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-6">
+          <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-blue-50/50 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateProgress()" class="tracker-cb w-5 h-5 rounded text-blue-600 focus:ring-blue-500 border-slate-300">
+            <span class="ml-3 text-sm font-semibold text-slate-800">A1 數位學習(一)</span>
+          </label>
+          <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-blue-50/50 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateProgress()" class="tracker-cb w-5 h-5 rounded text-blue-600 focus:ring-blue-500 border-slate-300">
+            <span class="ml-3 text-sm font-semibold text-slate-800">A2 數位學習(二)</span>
+          </label>
+          <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-blue-50/50 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateProgress()" class="tracker-cb w-5 h-5 rounded text-blue-600 focus:ring-blue-500 border-slate-300">
+            <span class="ml-3 text-sm font-semibold text-slate-800">A3 數位素養議題</span>
+          </label>
+          <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-blue-50/50 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateProgress()" class="tracker-cb w-5 h-5 rounded text-blue-600 focus:ring-blue-500 border-slate-300">
+            <span class="ml-3 text-sm font-semibold text-slate-800">B1 自主學習工作坊</span>
+          </label>
+          <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-blue-50/50 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateProgress()" class="tracker-cb w-5 h-5 rounded text-blue-600 focus:ring-blue-500 border-slate-300">
+            <span class="ml-3 text-sm font-semibold text-slate-800">B2 科技融入教學</span>
+          </label>
+          <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-blue-50/50 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateProgress()" class="tracker-cb w-5 h-5 rounded text-blue-600 focus:ring-blue-500 border-slate-300">
+            <span class="ml-3 text-sm font-semibold text-slate-800">B4 軟體與新興科技</span>
+          </label>
+          <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-blue-50/50 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateProgress()" class="tracker-cb w-5 h-5 rounded text-blue-600 focus:ring-blue-500 border-slate-300">
+            <span class="ml-3 text-sm font-semibold text-slate-800">B5-1 數位學習領導</span>
+          </label>
+          <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-blue-50/50 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateProgress()" class="tracker-cb w-5 h-5 rounded text-blue-600 focus:ring-blue-500 border-slate-300">
+            <span class="ml-3 text-sm font-semibold text-slate-800">B5-2 跨校共備觀課</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- 區塊五：常見問題 FAQ -->
+    <section class="scroll-mt-20">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl font-bold text-slate-900">常見問題與研習疑難排解</h2>
+        <p class="text-slate-500 text-sm mt-1">搜尋不到紀錄？時數未核發？請參考以下建議</p>
+      </div>
+
+      <div class="space-y-4 max-w-3xl mx-auto">
+        <details class="bg-white rounded-2xl border border-slate-200 p-5 group transition">
+          <summary class="font-bold text-slate-900 cursor-pointer flex justify-between items-center list-none">
+            <span>Q1. 明明有上過研習，為什麼在全教網搜尋不到代碼？</span>
+            <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <div class="mt-3 pt-3 border-t border-slate-100 text-sm text-slate-600 space-y-2 leading-relaxed">
+            <p>1. <strong>名稱未打上代碼：</strong> 部分早期辦理的研習，標題可能僅寫「數位學習工作坊」或「因材網操作培訓」，未在標題加上【A1】或【A2】字樣。建議嘗試搜尋「數位學習」或「自主學習」等核心關鍵字。</p>
+            <p>2. <strong>主辦單位尚未核發：</strong> 請確認該場研習的「審核狀態」是否已顯示為「已核發時數」。若狀態仍在「審核中」，請聯繫主辦承辦學校承辦人。</p>
+          </div>
+        </details>
+
+        <details class="bg-white rounded-2xl border border-slate-200 p-5 group transition">
+          <summary class="font-bold text-slate-900 cursor-pointer flex justify-between items-center list-none">
+            <span>Q2. 在「教師 e 學院」完成的線上研習，怎麼查不到？</span>
+            <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <div class="mt-3 pt-3 border-t border-slate-100 text-sm text-slate-600 leading-relaxed">
+            「教師 e 學院」或「臺北 e 大」等外平台的時數，系統會在完課通過後的 <strong>1 至 3 個工作天</strong> 自動匯入全教網。請確認：
+            <ul class="list-disc list-inside mt-2 space-y-1 text-slate-500">
+              <li>線上平台帳號是否已正確綁定您的「身分證字號」。</li>
+              <li>若是急需證明，可先直接至教師 e 學院下載單科「研習通過證明書」截圖備查。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="bg-white rounded-2xl border border-slate-200 p-5 group transition">
+          <summary class="font-bold text-slate-900 cursor-pointer flex justify-between items-center list-none">
+            <span>Q3. 介聘或考核需要檢附證明時，該如何下載具防偽公信力的檔案？</span>
+            <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
+          </summary>
+          <div class="mt-3 pt-3 border-t border-slate-100 text-sm text-slate-600 leading-relaxed">
+            在「個人管理專區」→「研習紀錄」中查詢出結果後，點選右上角的<strong>「列印研習履歷」</strong>，系統會自動生成帶有教育部防偽浮水印與條碼的 PDF / 網頁列印版，可直接另存為 PDF 檔案提交。
+          </div>
+        </details>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 頁尾 Footer -->
+  <footer class="bg-slate-900 text-slate-400 text-xs py-8 border-t border-slate-800 mt-12">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center space-y-2">
+      <p class="font-medium text-slate-300">全國教師在職進修資訊網 研習代碼查詢指引小幫手</p>
+      <p>本頁面為教學說明用途，實際研習時數採計與認證標準請以教育部及各縣市教育局處最新公文規範為準。</p>
+      <p class="text-slate-600">快捷鍵支援：Windows (Ctrl+F) ‧ macOS (Cmd+F)</p>
+    </div>
+  </footer>
+
+  <!-- 互動腳本 JavaScript -->
+  <script>
+    // 複製文字功能 (相容 iFrame 環境)
+    function copyCode(code, label) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(code).then(() => {
+          showToast(`已複製關鍵字：「${code}」！可直接按 Ctrl+F 貼上搜尋`);
+        }).catch(() => {
+          fallbackCopy(code);
+        });
+      } else {
+        fallbackCopy(code);
+      }
+    }
+
+    // 相容性複製機制
+    function fallbackCopy(text) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-9999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showToast(`已複製關鍵字：「${text}」！可直接按 Ctrl+F 貼上搜尋`);
+      } catch (err) {
+        showToast(`複製失敗，請手動輸入：${text}`);
+      }
+      document.body.removeChild(textArea);
+    }
+
+    // 彈出 Toast 訊息
+    let toastTimeout;
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+      toastMsg.innerText = msg;
+      
+      toast.classList.remove('opacity-0', 'translate-y-20');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'translate-y-20');
+      }, 2500);
+    }
+
+    // 更新個人檢核進度環
+    function updateProgress() {
+      const checkboxes = document.querySelectorAll('.tracker-cb');
+      const total = checkboxes.length;
+      let checkedCount = 0;
+      
+      checkboxes.forEach(cb => {
+        if (cb.checked) checkedCount++;
+      });
+
+      const percentage = Math.round((checkedCount / total) * 100);
+      
+      document.getElementById('progress-text').innerText = `${checkedCount} / ${total} 項`;
+      document.getElementById('progress-percent').innerText = `${percentage}%`;
+      
+      const circle = document.getElementById('progress-circle');
+      circle.setAttribute('stroke-dasharray', `${percentage}, 100`);
+
+      if (percentage === 100) {
+        circle.classList.remove('text-blue-600');
+        circle.classList.add('text-emerald-500');
+      } else {
+        circle.classList.remove('text-emerald-500');
+        circle.classList.add('text-blue-600');
+      }
+    }
+  </script>
+</body>
+</html>
